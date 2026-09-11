@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6051499531677717" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAE Gratuity Calculator — Estimate Your End-of-Service Pay | RotaWage</title>
+<meta name="description" content="Free UAE end-of-service gratuity calculator. Enter your basic salary and years of service for an instant estimate, based on UAE Federal Decree-Law No. 33 of 2021.">
+<link rel="canonical" href="https://kelvorixai.github.io/rotawage/tools/gratuity-calculator.html">
+<meta property="og:title" content="UAE Gratuity Calculator — Estimate Your End-of-Service Pay">
+<meta property="og:description" content="Enter your basic salary and years of service for an instant gratuity estimate.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .calc{ border:1px solid var(--line); padding:28px 26px; margin-top:28px; background:var(--paper-raised); }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
+  .field label{ font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); font-weight:500; }
+  .field input, .field select{
+    font: inherit; font-size:16px; padding:11px 12px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); border-radius:2px; width:100%;
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .field-row{ grid-template-columns:1fr; } }
+  button.calc-btn{
+    font: inherit; font-size:15px; font-weight:600; background:var(--teal); color:var(--paper);
+    border:none; padding:13px 22px; border-radius:2px; cursor:pointer; width:100%;
+  }
+  button.calc-btn:hover{ background:var(--teal-soft); }
+  .result{ margin-top:26px; padding:22px 24px; border:1px solid var(--brass); border-left:4px solid var(--brass); background:var(--paper); display:none; }
+  .result.show{ display:block; }
+  .result .amount{ font-family:"Fraunces", serif; font-size:2.4rem; font-weight:700; color:var(--brass-strong); font-variant-numeric:tabular-nums; }
+  .result .amount span{ font-size:1.1rem; font-family:"IBM Plex Sans", sans-serif; font-weight:500; color:var(--ink-soft); }
+  .result .breakdown{ margin-top:14px; font-size:13.5px; color:var(--ink-soft); font-family:"IBM Plex Mono", monospace; line-height:1.8; }
+  .share-btn{
+    margin-top:16px; font: inherit; font-size:13px; background:none; color:var(--teal-soft);
+    border:1px solid var(--teal-soft); padding:8px 14px; border-radius:2px; cursor:pointer;
+  }
+  .share-btn:hover{ background:var(--teal-soft); color:var(--paper); }
+  .formula-note{ font-size:13px; color:var(--ink-soft); margin-top:10px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/rotawage/">RotaWage</a>
+    <nav class="site">
+      <a href="/rotawage/">Guides</a>
+      <a href="/rotawage/tools/">Tools</a>
+      <a href="/rotawage/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="post">
+    <header class="meta">
+      <span class="tag">Tool</span>
+      <h1>UAE gratuity calculator</h1>
+      <p class="dek">Enter your basic monthly salary and length of service for an instant estimate of your end-of-service gratuity under current UAE labour law.</p>
+    </header>
+
+    <div class="calc">
+      <div class="field">
+        <label for="salary">Basic monthly salary (AED)</label>
+        <input type="number" id="salary" inputmode="decimal" placeholder="e.g. 15000" min="0" step="any">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="years">Full years of service</label>
+          <input type="number" id="years" inputmode="numeric" placeholder="e.g. 4" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="months">Extra months</label>
+          <input type="number" id="months" inputmode="numeric" placeholder="e.g. 6" min="0" max="11" step="1">
+        </div>
+      </div>
+      <div class="field">
+        <label for="reason">How your employment is ending</label>
+        <select id="reason">
+          <option value="termination">Terminated by employer / contract end</option>
+          <option value="resignation">Resigning voluntarily</option>
+        </select>
+      </div>
+
+      <button class="calc-btn" id="calcBtn" type="button">Calculate my gratuity</button>
+
+      <div class="result" id="result">
+        <div class="amount"><span>Estimated gratuity: </span><span id="amountValue">AED 0</span></div>
+        <div class="breakdown" id="breakdown"></div>
+        <button class="share-btn" id="shareBtn" type="button">Copy result to share</button>
+      </div>
+    </div>
+
+    <div class="content" style="margin-top:36px;">
+      <h2>How this is calculated</h2>
+      <p>Under UAE Federal Decree-Law No. 33 of 2021, end-of-service gratuity is based on your <strong>basic salary only</strong> (not allowances or bonuses), and only applies after at least one full year of continuous service:</p>
+      <ul>
+        <li><strong>First 5 years:</strong> 21 days of basic pay for each year of service</li>
+        <li><strong>Beyond 5 years:</strong> 30 days of basic pay for each additional year</li>
+        <li><strong>Cap:</strong> total gratuity cannot exceed two years' total salary</li>
+        <li>Under a certain reading of the law, voluntary resignation before 5 years can reduce the entitlement — this calculator shows the full unreduced estimate for resignation cases too, so treat that number as an upper bound, not a guarantee.</li>
+      </ul>
+      <p class="formula-note">This is an estimate for general information only, not a legal or payroll determination. Confirm your exact entitlement with your employer, HR, or MOHRE before relying on it for a financial decision.</p>
+    </div>
+  </article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>RotaWage</span>
+    <span><a href="/rotawage/">More guides</a></span>
+    <span><a href="/rotawage/privacy.html">Privacy</a> · <a href="/rotawage/terms.html">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var calcBtn = document.getElementById('calcBtn');
+  var shareBtn = document.getElementById('shareBtn');
+  var resultEl = document.getElementById('result');
+  var amountEl = document.getElementById('amountValue');
+  var breakdownEl = document.getElementById('breakdown');
+  var lastSummary = '';
+
+  function fmt(n){
+    return 'AED ' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  }
+
+  calcBtn.addEventListener('click', function(){
+    var salary = parseFloat(document.getElementById('salary').value) || 0;
+    var years = parseInt(document.getElementById('years').value, 10) || 0;
+    var months = parseInt(document.getElementById('months').value, 10) || 0;
+    var reason = document.getElementById('reason').value;
+
+    if (salary <= 0 || (years <= 0 && months <= 0)) {
+      breakdownEl.textContent = '';
+      amountEl.textContent = 'Enter your salary and service length above';
+      resultEl.classList.add('show');
+      shareBtn.style.display = 'none';
+      return;
+    }
+
+    var totalYears = years + (months / 12);
+    var dailyRate = salary / 30;
+    var gratuity = 0;
+    var lines = [];
+
+    if (totalYears < 1) {
+      gratuity = 0;
+      lines.push('Under 1 year of service — not yet eligible under UAE law');
+    } else {
+      var firstBand = Math.min(totalYears, 5);
+      var secondBand = Math.max(totalYears - 5, 0);
+      var firstAmount = firstBand * 21 * dailyRate;
+      var secondAmount = secondBand * 30 * dailyRate;
+      gratuity = firstAmount + secondAmount;
+      lines.push('Daily basic rate: ' + fmt(dailyRate));
+      lines.push('First ' + firstBand.toFixed(1) + ' yrs @ 21 days/yr: ' + fmt(firstAmount));
+      if (secondBand > 0) lines.push('Remaining ' + secondBand.toFixed(1) + ' yrs @ 30 days/yr: ' + fmt(secondAmount));
+
+      var cap = salary * 24;
+      if (gratuity > cap) {
+        lines.push('Capped at 2 years\' salary: ' + fmt(cap));
+        gratuity = cap;
+      }
+      if (reason === 'resignation' && totalYears < 5) {
+        lines.push('Note: resigning before 5 years can reduce this under some contract terms — shown here uncapped by that rule');
+      }
+    }
+
+    amountEl.textContent = fmt(Math.round(gratuity));
+    breakdownEl.innerHTML = lines.join('<br>');
+    resultEl.classList.add('show');
+    shareBtn.style.display = 'inline-block';
+    lastSummary = 'My estimated UAE gratuity after ' + totalYears.toFixed(1) + ' years: ' + fmt(Math.round(gratuity)) + '. Calculate yours free: https://kelvorixai.github.io/rotawage/tools/gratuity-calculator.html';
+  });
+
+  shareBtn.addEventListener('click', function(){
+    if (!lastSummary) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(lastSummary).then(function(){
+        shareBtn.textContent = 'Copied!';
+        setTimeout(function(){ shareBtn.textContent = 'Copy result to share'; }, 1800);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
+
