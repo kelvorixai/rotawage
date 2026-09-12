@@ -40,7 +40,70 @@
   }
   .share-btn:hover{ background:var(--teal-soft); color:var(--paper); }
   .formula-note{ font-size:13px; color:var(--ink-soft); margin-top:10px; }
+  .faq{ margin-top:36px; }
+  .faq details{ border:1px solid var(--line); border-radius:2px; padding:14px 16px; margin-bottom:10px; background:var(--paper-raised); }
+  .faq summary{ cursor:pointer; font-weight:600; list-style:none; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:"+"; float:right; color:var(--ink-soft); }
+  .faq details[open] summary::after{ content:"\2013"; }
+  .faq p{ margin-top:10px; font-size:14.5px; color:var(--ink-soft); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is UAE gratuity calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under UAE Federal Decree-Law No. 33 of 2021, gratuity is based on basic salary only: 21 days of basic pay per year for the first five years of service, and 30 days per year after that, capped at two years' total salary. It only applies after at least one full year of continuous service."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does gratuity include housing and transport allowances?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Gratuity is calculated on basic salary only, not gross salary — allowances and bonuses are excluded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is gratuity reduced if I resign instead of being terminated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under one reading of the law, voluntary resignation before five years of service can reduce the entitlement. This calculator shows the full unreduced estimate for resignation cases too, so treat it as an upper bound rather than a guarantee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a maximum gratuity payout?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — total gratuity cannot exceed two years' total salary, regardless of length of service."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UAE Gratuity Calculator",
+  "url": "https://kelvorixai.github.io/rotawage/tools/gratuity-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "AED"
+  },
+  "description": "Free calculator that estimates UAE end-of-service gratuity from basic salary and years of service, under Federal Decree-Law No. 33 of 2021."
+}
+</script>
 </head>
 <body>
 
@@ -105,6 +168,26 @@
         <li>Under a certain reading of the law, voluntary resignation before 5 years can reduce the entitlement — this calculator shows the full unreduced estimate for resignation cases too, so treat that number as an upper bound, not a guarantee.</li>
       </ul>
       <p class="formula-note">This is an estimate for general information only, not a legal or payroll determination. Confirm your exact entitlement with your employer, HR, or MOHRE before relying on it for a financial decision.</p>
+    </div>
+
+    <div class="content faq" style="margin-top:36px;">
+      <h2>Frequently asked questions</h2>
+      <details>
+        <summary>How is UAE gratuity calculated?</summary>
+        <p>Under UAE Federal Decree-Law No. 33 of 2021, gratuity is based on basic salary only: 21 days of basic pay per year for the first five years of service, and 30 days per year after that, capped at two years' total salary. It only applies after at least one full year of continuous service.</p>
+      </details>
+      <details>
+        <summary>Does gratuity include housing and transport allowances?</summary>
+        <p>No. Gratuity is calculated on basic salary only, not gross salary — allowances and bonuses are excluded.</p>
+      </details>
+      <details>
+        <summary>Is gratuity reduced if I resign instead of being terminated?</summary>
+        <p>Under one reading of the law, voluntary resignation before five years of service can reduce the entitlement. This calculator shows the full unreduced estimate for resignation cases too, so treat it as an upper bound rather than a guarantee.</p>
+      </details>
+      <details>
+        <summary>Is there a maximum gratuity payout?</summary>
+        <p>Yes — total gratuity cannot exceed two years' total salary, regardless of length of service.</p>
+      </details>
     </div>
   </article>
 </main>
@@ -193,4 +276,3 @@
 
 </body>
 </html>
-
